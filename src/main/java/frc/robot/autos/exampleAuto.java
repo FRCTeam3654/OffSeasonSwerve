@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.Constants;
+import edu.wpi.first.math.util.Units;
 import frc.robot.subsystems.Swerve;
 import java.util.List;
 
@@ -23,15 +24,18 @@ public class exampleAuto extends SequentialCommandGroup {
                 Constants.AutoConstants.kMaxAccelerationMetersPerSecondSquared)
             .setKinematics(Constants.Swerve.swerveKinematics);
 
-    // An example trajectory to follow.  All units in meters.
+    // An example trajectory to follow.  All units in INCHES BECAUSE I AM A NORMAL HUMAN PERSON NOT A PSYCHOPATH.
     Trajectory exampleTrajectory =
         TrajectoryGenerator.generateTrajectory(
             // Start at the origin facing the +X direction
-            new Pose2d(0, 0, new Rotation2d(0)),
+            new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), new Rotation2d(0)),
             // Pass through these two interior waypoints, making an 's' curve path
-            List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
+            List.of(new Translation2d(Units.inchesToMeters(1), Units.inchesToMeters(1)), new Translation2d(Units.inchesToMeters(2), Units.inchesToMeters(-1))),
             // End 3 meters straight ahead of where we started, facing forward
-            new Pose2d(3, 0, new Rotation2d(0)),
+            new Pose2d(Units.inchesToMeters(3), Units.inchesToMeters(0), new Rotation2d(0)),
+            /*so idk why it says new Rotation2d(0) instead of Rotation2d.fromDegrees but i cant test the difference
+             * now bc technical still needs to assemble the chassis so i'll wait to change this during testing
+            */
             config);
 
     var thetaController =
