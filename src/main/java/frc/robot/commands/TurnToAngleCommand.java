@@ -38,11 +38,12 @@ public class TurnToAngleCommand extends CommandBase {
         final double kP = 0.2;
         SmartDashboard.putNumber("gyroAngle", gyroAngle);
     
-        if (angle > 180) {
-            angle = -(360 - angle);
-        } else if (angle < -180) {
-            angle = 360 + angle;
-        }
+        // for Pigeon 2,  no need to wrap around angle when it cross 180 or 360
+        //if (angle > 180) {
+        //    angle = -(360 - angle);
+        //} else if (angle < -180) {
+        //    angle = 360 + angle;
+        //}
     
         double err = angle - gyroAngle;
         double speed = MathUtil.clamp(err * kP, -Constants.Swerve.maxAngularVelocity*0.5, Constants.Swerve.maxAngularVelocity*0.5);
