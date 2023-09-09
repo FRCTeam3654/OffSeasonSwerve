@@ -3,7 +3,14 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
-
+/*
+ *  reference to: https://github.com/SuperiorRoboworksTeam857/2023SwerveTest/blob/main/src/main/java/frc/robot/RobotContainer.java 
+ * 
+ *           and Team857's 2023 competition code: https://github.com/SuperiorRoboworksTeam857/2023ChargedUp/blob/main/src/main/java/frc/robot/RobotContainer.java 
+ * 
+ *  some issue with syntax:  () -> -driver.getRawAxis(translationAxis)
+ *  Just remove the lambda function syntax, it should be ok:  driver.getRawAxis(translationAxis)
+ */
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -35,6 +42,10 @@ public class RobotContainer {
   private final JoystickButton robotCentric =
       new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
+
+  // Added by Jun Wu on 9/8/2023, copied from https://github.com/SuperiorRoboworksTeam857/2023SwerveTest/blob/main/src/main/java/frc/robot/RobotContainer.java
+  private final JoystickButton slowSpeed =
+      new JoystickButton(driver, XboxController.Button.kRightBumper.value);
   /* Subsystems */
   private final Swerve s_Swerve = new Swerve();
 
@@ -43,10 +54,12 @@ public class RobotContainer {
     s_Swerve.setDefaultCommand(
         new TeleopSwerve(
             s_Swerve,
+            //driver.getRawAxis(translationAxis),
             () -> -driver.getRawAxis(translationAxis),
             () -> -driver.getRawAxis(strafeAxis),
             () -> -driver.getRawAxis(rotationAxis),
-            () -> robotCentric.get()));
+            () -> robotCentric.getAsBoolean(),
+            () -> slowSpeed.getAsBoolean()));
 
     // Configure the button bindings
     configureButtonBindings();

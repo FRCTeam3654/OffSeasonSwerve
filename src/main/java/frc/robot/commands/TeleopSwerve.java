@@ -15,6 +15,7 @@ public class TeleopSwerve extends CommandBase {
   private DoubleSupplier strafeSup;
   private DoubleSupplier rotationSup;
   private BooleanSupplier robotCentricSup;
+  private BooleanSupplier slowSpeedSup;
 
   private SlewRateLimiter translationLimiter = new SlewRateLimiter(3.0);
   private SlewRateLimiter strafeLimiter = new SlewRateLimiter(3.0);
@@ -25,7 +26,8 @@ public class TeleopSwerve extends CommandBase {
       DoubleSupplier translationSup,
       DoubleSupplier strafeSup,
       DoubleSupplier rotationSup,
-      BooleanSupplier robotCentricSup) {
+      BooleanSupplier robotCentricSup,
+      BooleanSupplier slowSpeedSup) {
     this.s_Swerve = s_Swerve;
     addRequirements(s_Swerve);
 
@@ -33,20 +35,28 @@ public class TeleopSwerve extends CommandBase {
     this.strafeSup = strafeSup;
     this.rotationSup = rotationSup;
     this.robotCentricSup = robotCentricSup;
+    this.slowSpeedSup = slowSpeedSup;
   }
 
   @Override
   public void execute() {
+
+    double speedMultiplier = slowSpeedSup.getAsBoolean() ? 0.2 : 1.0;
+
     /* Get Values, Deadband*/
     double translationVal =
         translationLimiter.calculate(
+            speedMultiplier *
             MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.Swerve.stickDeadband));
     double strafeVal =
         strafeLimiter.calculate(
+            speedMultiplier *
             MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.Swerve.stickDeadband));
     double rotationVal =
         rotationLimiter.calculate(
+            speedMultiplier *
             MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.Swerve.stickDeadband));
+
 
     /* Drive */
     s_Swerve.drive(

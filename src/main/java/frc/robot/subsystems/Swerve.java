@@ -1,5 +1,10 @@
 package frc.robot.subsystems;
-
+/*
+ * Need combine the code from https://github.com/SuperiorRoboworksTeam857/2023SwerveTest/blob/main/src/main/java/frc/robot/subsystems/Swerve.java 
+ *   since its code is updated to 2023 library code while https://github.com/frc3512/SwerveBot-2022/blob/main/src/main/java/frc/robot/subsystems/Swerve.java is still using 2022 library
+ * 
+ * 
+ */
 import com.ctre.phoenix.sensors.Pigeon2;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -8,10 +13,14 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+
+import edu.wpi.first.math.kinematics.SwerveModulePosition; // added by Jun Wu 9/8/2023
+
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.Timer;
 
 public class Swerve extends SubsystemBase {
   private final Pigeon2 gyro;
@@ -26,7 +35,7 @@ public class Swerve extends SubsystemBase {
     gyro.configFactoryDefault();
     zeroGyro();
 
-    swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getYaw());
+    //swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getYaw());  // constructor changed from 2022 to 2023
 
     mSwerveMods =
         new SwerveModule[] {
@@ -35,6 +44,8 @@ public class Swerve extends SubsystemBase {
           new SwerveModule(2, Constants.Swerve.Mod2.constants),
           new SwerveModule(3, Constants.Swerve.Mod3.constants)
         };
+
+    swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getYaw(), getPositions());
 
     field = new Field2d();
     SmartDashboard.putData("Field", field);
@@ -69,7 +80,8 @@ public class Swerve extends SubsystemBase {
   }
 
   public void resetOdometry(Pose2d pose) {
-    swerveOdometry.resetPosition(pose, getYaw());
+    //swerveOdometry.resetPosition(pose, getYaw());
+    swerveOdometry.resetPosition(getYaw(), getPositions(), pose);
   }
 
   public SwerveModuleState[] getStates() {
@@ -79,6 +91,16 @@ public class Swerve extends SubsystemBase {
     }
     return states;
   }
+
+  // Added by Jun Wu 9/8/2023, copied from https://github.com/SuperiorRoboworksTeam857/2023SwerveTest/blob/main/src/main/java/frc/robot/subsystems/Swerve.java
+  //              or similarly from  https://github.com/Team364/BaseFalconSwerve/blob/main/src/main/java/frc/robot/subsystems/Swerve.java
+  public SwerveModulePosition[] getPositions(){
+    SwerveModulePosition[] positions = new SwerveModulePosition[4];
+    for(SwerveModule mod : mSwerveMods){
+        positions[mod.moduleNumber] = mod.getPosition();
+    }
+    return positions;
+}
 
   public void zeroGyro() {
     gyro.setYaw(0);
@@ -90,9 +112,12 @@ public class Swerve extends SubsystemBase {
         : Rotation2d.fromDegrees(gyro.getYaw());
   }
 
+
   @Override
   public void periodic() {
-    swerveOdometry.update(getYaw(), getStates());
+    //swerveOdometry.update(getYaw(), getStates());
+    // see the code from https://github.com/SuperiorRoboworksTeam857/2023SwerveTest/blob/main/src/main/java/frc/robot/subsystems/Swerve.java
+    swerveOdometry.update(getYaw(), getPositions());
     field.setRobotPose(getPose());
 
     for (SwerveModule mod : mSwerveMods) {
