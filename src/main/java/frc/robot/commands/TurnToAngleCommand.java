@@ -33,7 +33,7 @@ public class TurnToAngleCommand extends CommandBase {
     
     @Override
     public void execute(){
-        double gyroAngle = m_robotDrive.getYaw().getDegrees();
+         double gyroAngle = m_robotDrive.getYaw().getDegrees();
 
         final double kP = 0.2;
         SmartDashboard.putNumber("gyroAngle", gyroAngle);
@@ -52,13 +52,13 @@ public class TurnToAngleCommand extends CommandBase {
             m_robotDrive.drive(new Translation2d(0,0), speed, false, true);
         } else {
             complete = true;
-        }
-    }
+        } 
+    } 
 
     @Override
     public void end(boolean inturrupted){
-        m_robotDrive.drive(new Translation2d(0,0), 0, false, true);
-        timer.stop();
+       // m_robotDrive.drive(new Translation2d(0,0), 0, false, true);
+       // timer.stop();
     }
 
     @Override

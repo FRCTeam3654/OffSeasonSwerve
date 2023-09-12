@@ -41,7 +41,7 @@ public class TeleopSwerve extends CommandBase {
   @Override
   public void execute() {
 
-    double speedMultiplier = slowSpeedSup.getAsBoolean() ? 0.2 : 1.0;
+    double speedMultiplier = slowSpeedSup.getAsBoolean() ? 0.2 : 0.5;
 
     /* Get Values, Deadband*/
     double translationVal =
@@ -62,7 +62,7 @@ public class TeleopSwerve extends CommandBase {
     s_Swerve.drive(
         new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed),
         rotationVal * Constants.Swerve.maxAngularVelocity,
-        !robotCentricSup.getAsBoolean(),
+        false,
         true);
   }
 }
