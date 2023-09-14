@@ -61,10 +61,10 @@ public class TeleopSwerve extends CommandBase {
 
     /* Drive */  
     s_Swerve.drive(
-        //new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed),
-        new Translation2d(translationVal, 0).times(Constants.Swerve.maxSpeed),
-        //rotationVal * Constants.Swerve.maxAngularVelocity,
-        rotationVal * 0, 
+      new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed),
+        //new Translation2d(translationVal, 0).times(Constants.Swerve.maxSpeed),
+        rotationVal * Constants.Swerve.maxAngularVelocity,
+        //rotationVal * 0, 
         false,
         true);
         
