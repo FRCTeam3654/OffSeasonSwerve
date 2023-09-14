@@ -41,10 +41,11 @@ public class TeleopSwerve extends CommandBase {
   @Override
   public void execute() {
 
-    double speedMultiplier = slowSpeedSup.getAsBoolean() ? 0.2 : 0.5;
+    double speedMultiplier = slowSpeedSup.getAsBoolean() ? 0.05 : 0.2; //0.2, 0.5
+
 
     /* Get Values, Deadband*/
-    double translationVal =
+     double translationVal =
         translationLimiter.calculate(
             speedMultiplier *
             MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.Swerve.stickDeadband));
@@ -58,11 +59,14 @@ public class TeleopSwerve extends CommandBase {
             MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.Swerve.stickDeadband));
 
 
-    /* Drive */
+    /* Drive */  
     s_Swerve.drive(
-        new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed),
-        rotationVal * Constants.Swerve.maxAngularVelocity,
+        //new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed),
+        new Translation2d(translationVal, 0).times(Constants.Swerve.maxSpeed),
+        //rotationVal * Constants.Swerve.maxAngularVelocity,
+        rotationVal * 0, 
         false,
         true);
+        
   }
 }

@@ -39,11 +39,12 @@ public class Swerve extends SubsystemBase {
 
     mSwerveMods =
         new SwerveModule[] {
-          new SwerveModule(0, Constants.Swerve.Mod0.constants),
-          new SwerveModule(1, Constants.Swerve.Mod1.constants),
-          new SwerveModule(2, Constants.Swerve.Mod2.constants),
-          new SwerveModule(3, Constants.Swerve.Mod3.constants)
+          new SwerveModule(0, Constants.Swerve.Mod0.constants, false),
+          new SwerveModule(1, Constants.Swerve.Mod1.constants, true),
+          new SwerveModule(2, Constants.Swerve.Mod2.constants, false),
+          new SwerveModule(3, Constants.Swerve.Mod3.constants, true)
         };
+
 
     swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getYaw(), getPositions());
 
@@ -65,6 +66,7 @@ public class Swerve extends SubsystemBase {
       mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
     }
   }
+
 
   /* Used by SwerveControllerCommand in Auto */
   public void setModuleStates(SwerveModuleState[] desiredStates) {

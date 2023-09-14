@@ -37,6 +37,7 @@ package frc.robot.subsystems;
    public int moduleNumber;
    private Rotation2d lastAngle;
    private Rotation2d angleOffset;
+   private boolean isInverted;
  
    private CANSparkMax angleMotor;
    private CANSparkMax driveMotor;
@@ -52,9 +53,10 @@ package frc.robot.subsystems;
        new SimpleMotorFeedforward(
            Constants.Swerve.driveKS, Constants.Swerve.driveKV, Constants.Swerve.driveKA);
  
-   public SwerveModule(int moduleNumber, SwerveModuleConstants moduleConstants) {
+   public SwerveModule(int moduleNumber, SwerveModuleConstants moduleConstants, boolean invert) {
      this.moduleNumber = moduleNumber;
      angleOffset = moduleConstants.angleOffset;
+     this.isInverted = invert;
  
      /* Angle Encoder Config */
      angleEncoder = new CANCoder(moduleConstants.cancoderID);
@@ -116,7 +118,8 @@ package frc.robot.subsystems;
      driveMotor.restoreFactoryDefaults();
      CANSparkMaxUtil.setCANSparkMaxBusUsage(driveMotor, Usage.kAll);
      driveMotor.setSmartCurrentLimit(Constants.Swerve.driveContinuousCurrentLimit);
-     driveMotor.setInverted(Constants.Swerve.driveInvert);
+     //driveMotor.setInverted(Constants.Swerve.driveInvert);
+     driveMotor.setInverted(this.isInverted);  
      driveMotor.setIdleMode(Constants.Swerve.driveNeutralMode);
      driveEncoder.setVelocityConversionFactor(Constants.Swerve.driveConversionVelocityFactor);
      driveEncoder.setPositionConversionFactor(Constants.Swerve.driveConversionPositionFactor);
