@@ -26,7 +26,7 @@ public final class Constants {
     public static final double closedLoopRamp = 0.0;
 
     public static final double driveGearRatio = (6.75 / 1.0); // 6.75:1
-    public static final double angleGearRatio = (12.8 / 1.0); // 12.8:1
+    public static final double angleGearRatio = 21.43; // (12.8 / 1.0); // 12.8:1   //   21.43 ??  Note:  MK4 has steering gear ratio 12.8.  But ours is MK4i which has 150/7 = 21.43 ratio
 
     public static final SwerveDriveKinematics swerveKinematics =
         new SwerveDriveKinematics(
