@@ -58,7 +58,7 @@ public class TeleopSwerve extends CommandBase {
             speedMultiplier *
             MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.Swerve.stickDeadband));
 
-    strafeVal = 0;
+    //strafeVal = 0;
 
     /* Drive */  
     s_Swerve.drive(
