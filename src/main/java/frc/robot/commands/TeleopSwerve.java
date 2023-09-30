@@ -8,6 +8,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Swerve;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
+import frc.robot.RobotContainer;
 
 public class TeleopSwerve extends CommandBase {
   private Swerve s_Swerve;
@@ -20,6 +21,8 @@ public class TeleopSwerve extends CommandBase {
   private SlewRateLimiter translationLimiter = new SlewRateLimiter(3.0);
   private SlewRateLimiter strafeLimiter = new SlewRateLimiter(3.0);
   private SlewRateLimiter rotationLimiter = new SlewRateLimiter(3.0);
+
+  private boolean isFieldRelative;
 
   public TeleopSwerve(
       Swerve s_Swerve,
@@ -41,7 +44,7 @@ public class TeleopSwerve extends CommandBase {
   @Override
   public void execute() {
 
-    double speedMultiplier = slowSpeedSup.getAsBoolean() ? 0.05 : 0.2; //0.2, 0.5
+    double speedMultiplier = slowSpeedSup.getAsBoolean() ? 0.5 : 0.3; //0.2, 0.5 //0.05, 0.2
 
 
     /* Get Values, Deadband*/
@@ -59,14 +62,15 @@ public class TeleopSwerve extends CommandBase {
             MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.Swerve.stickDeadband));
 
     //strafeVal = 0;
-
+    
     /* Drive */  
     s_Swerve.drive(
       new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed),
         //new Translation2d(translationVal, 0).times(Constants.Swerve.maxSpeed),
         rotationVal * Constants.Swerve.maxAngularVelocity,
-        //rotationVal * 0, 
-        false,
+        //rotationVal * 0,
+        //false,
+        !robotCentricSup.getAsBoolean(), 
         true);
         
   }

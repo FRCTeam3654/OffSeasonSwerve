@@ -57,9 +57,14 @@ public class Swerve extends SubsystemBase {
     SwerveModuleState[] swerveModuleStates =
         Constants.Swerve.swerveKinematics.toSwerveModuleStates(
             fieldRelative
-                ? ChassisSpeeds.fromFieldRelativeSpeeds(
-                    translation.getX(), translation.getY(), rotation, getYaw())
-                : new ChassisSpeeds(translation.getX(), translation.getY(), rotation));
+                //? ChassisSpeeds.fromFieldRelativeSpeeds(
+                    //translation.getX(), translation.getY(), rotation, getYaw())
+                //: new ChassisSpeeds(translation.getX(), translation.getY(), rotation));
+                ? new ChassisSpeeds(translation.getX(), translation.getY(), rotation)
+                    
+                : ChassisSpeeds.fromFieldRelativeSpeeds(
+                  translation.getX(), translation.getY(), rotation, getYaw()));
+
     SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);
 
     for (SwerveModule mod : mSwerveMods) {

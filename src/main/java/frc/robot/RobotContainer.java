@@ -28,38 +28,39 @@ import frc.robot.subsystems.*;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+
+  public static OI oi;
+  
   /* Controllers */
-  private final Joystick driver = new Joystick(0);
+  //private final Joystick driver = new Joystick(0);
 
   /* Drive Controls */
   private final int translationAxis = XboxController.Axis.kLeftY.value;
   private final int strafeAxis = XboxController.Axis.kLeftX.value;
   private final int rotationAxis = XboxController.Axis.kRightX.value;
 
-  /* Driver Buttons */
-  private final JoystickButton zeroGyro =
-      new JoystickButton(driver, XboxController.Button.kY.value);
-  private final JoystickButton robotCentric =
-      new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+
 
 
   // Added by Jun Wu on 9/8/2023, copied from https://github.com/SuperiorRoboworksTeam857/2023SwerveTest/blob/main/src/main/java/frc/robot/RobotContainer.java
-  private final JoystickButton slowSpeed =
-      new JoystickButton(driver, XboxController.Button.kRightBumper.value);
+  //private final JoystickButton slowSpeed =
+      //new JoystickButton(driver, XboxController.Button.kRightBumper.value);
   /* Subsystems */
   private final Swerve s_Swerve = new Swerve();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+
+    oi = new OI();
+
     s_Swerve.setDefaultCommand(
         new TeleopSwerve(
             s_Swerve,
-            //driver.getRawAxis(translationAxis),
-            () -> -driver.getRawAxis(translationAxis),
-            () -> -driver.getRawAxis(strafeAxis),
-            () -> -driver.getRawAxis(rotationAxis),
-            () -> robotCentric.getAsBoolean(),
-            () -> slowSpeed.getAsBoolean()));
+            () -> -oi.driverStick.getRawAxis(translationAxis),
+            () -> -oi.driverStick.getRawAxis(strafeAxis),
+            () -> -oi.driverStick.getRawAxis(rotationAxis),
+            () -> oi.robotCentric.getAsBoolean(),
+            () -> oi.slowSpeed.getAsBoolean()));
 
     // Configure the button bindings
     configureButtonBindings();
@@ -73,7 +74,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     /* Driver Buttons */
-    zeroGyro.whenPressed(new InstantCommand(() -> s_Swerve.zeroGyro()));
+    oi.zeroGyro.whenPressed(new InstantCommand(() -> s_Swerve.zeroGyro()));
   }
 
   /**
