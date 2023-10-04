@@ -113,6 +113,8 @@ public final static int PID_TURN = 1;
 public final static int REMOTE_0 = 0;
 public final static int REMOTE_1 = 1;
 
+public static boolean isOpenLoop = true;
+
 /*these are the pid gains responsiveness to the control loop
 *kF: 1023 represents toutput value to Talon at 100%, 7200 represents velocity units at 100% output
 *                                                         kP,  kI,  kD,    kF,  Iz,  PeakOutput*/

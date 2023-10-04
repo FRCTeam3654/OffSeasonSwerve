@@ -9,6 +9,8 @@ import frc.robot.subsystems.Swerve;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import frc.robot.RobotContainer;
+import frc.robot.RobotMap;
+
 
 public class TeleopSwerve extends CommandBase {
   private Swerve s_Swerve;
@@ -44,7 +46,7 @@ public class TeleopSwerve extends CommandBase {
   @Override
   public void execute() {
 
-    double speedMultiplier = slowSpeedSup.getAsBoolean() ? 0.5 : 0.3; //0.2, 0.5 //0.05, 0.2
+    double speedMultiplier = slowSpeedSup.getAsBoolean() ? 0.8 : 0.5; //0.2, 0.5 //0.05, 0.2
 
 
     /* Get Values, Deadband*/
@@ -71,7 +73,7 @@ public class TeleopSwerve extends CommandBase {
         //rotationVal * 0,
         //false,
         !robotCentricSup.getAsBoolean(), 
-        true);
+        RobotMap.isOpenLoop);
         
   }
 }
