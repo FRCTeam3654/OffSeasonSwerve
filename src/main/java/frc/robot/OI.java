@@ -55,9 +55,9 @@ public class OI {
   public Trigger sensorTrigger;
 
     /* Driver Buttons */
-public JoystickButton zeroGyro;
+  public JoystickButton zeroGyro;
     
-public JoystickButton robotCentric;
+  public JoystickButton robotCentric;
 
 
 
@@ -86,8 +86,8 @@ public JoystickButton robotCentric;
 
  
 
-
-//turnLeft180Button.onTrue(new TurnToAngleCommand(null, 180, 3));
+  //  All commands need be in RobotContainer's configureButtonBindings() now
+  //turnLeft180Button.onTrue(new TurnToAngleCommand(null, 180, 3));
 
 
   }

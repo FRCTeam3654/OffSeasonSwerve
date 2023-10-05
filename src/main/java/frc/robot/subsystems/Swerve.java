@@ -122,6 +122,10 @@ public class Swerve extends SubsystemBase {
     return Rotation2d.fromDegrees(gyro.getYaw());
   }
 
+  public double getYawInDegree() {
+    return gyro.getYaw();
+  }
+
 
   @Override
   public void periodic() {

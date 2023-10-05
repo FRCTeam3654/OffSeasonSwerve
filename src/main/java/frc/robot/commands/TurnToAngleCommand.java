@@ -35,7 +35,7 @@ public class TurnToAngleCommand extends CommandBase {
     public void execute(){
          double gyroAngle = m_robotDrive.getYaw().getDegrees();
 
-        final double kP = 0.2;
+        final double kP = 0.06;
         SmartDashboard.putNumber("gyroAngle", gyroAngle);
     
         // for Pigeon 2,  no need to wrap around angle when it cross 180 or 360

@@ -26,6 +26,10 @@ public class TeleopSwerve extends CommandBase {
 
   private boolean isFieldRelative;
 
+  private boolean driveStraightFlag = false;
+  private double driveStraightAngle = 0;
+
+
   public TeleopSwerve(
       Swerve s_Swerve,
       DoubleSupplier translationSup,
@@ -48,7 +52,8 @@ public class TeleopSwerve extends CommandBase {
 
     double speedMultiplier = slowSpeedSup.getAsBoolean() ? 0.8 : 0.5; //0.2, 0.5 //0.05, 0.2
 
-
+    double joystickX = 0.0;
+    
     /* Get Values, Deadband*/
      double translationVal =
         translationLimiter.calculate(
@@ -63,6 +68,28 @@ public class TeleopSwerve extends CommandBase {
             speedMultiplier *
             MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.Swerve.stickDeadband));
 
+
+    // handle drive straight 
+    if (RobotContainer.oi.driverStick.getRightTriggerAxis() > 0.4) { //drive straight button
+              if (!driveStraightFlag) {
+                driveStraightAngle = s_Swerve.getYawInDegree();
+                driveStraightFlag = true;
+              }
+              double vinniesError = driveStraightAngle - s_Swerve.getYawInDegree();
+              joystickX = vinniesError * RobotMap.driveStraightProportion;
+
+              // in drive straight mode, ignore rotation and strafe
+              rotationVal = joystickX;
+              strafeVal = 0;
+
+    }
+    else {
+      driveStraightFlag = false;
+    }
+        
+        
+        
+        
     //strafeVal = 0;
     
     /* Drive */  

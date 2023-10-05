@@ -74,7 +74,11 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     /* Driver Buttons */
-    oi.zeroGyro.whenPressed(new InstantCommand(() -> s_Swerve.zeroGyro()));
+    //oi.zeroGyro.whenPressed(new InstantCommand(() -> s_Swerve.zeroGyro()));
+    oi.zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
+
+
+    oi.turnLeft180Button.onTrue(new TurnToAngleCommand(s_Swerve, 180, 3));
   }
 
   /**
