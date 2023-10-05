@@ -30,9 +30,9 @@ public class exampleAuto extends SequentialCommandGroup {
             // Start at the origin facing the +X direction
             new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), new Rotation2d(0)),
             // Pass through these two interior waypoints, making an 's' curve path
-            List.of(new Translation2d(Units.inchesToMeters(1), Units.inchesToMeters(1)), new Translation2d(Units.inchesToMeters(2), Units.inchesToMeters(-1))),
+            List.of(new Translation2d(Units.inchesToMeters(30), Units.inchesToMeters(30)), new Translation2d(Units.inchesToMeters(60), Units.inchesToMeters(-30))),
             // End 3 meters straight ahead of where we started, facing forward
-            new Pose2d(Units.inchesToMeters(3), Units.inchesToMeters(0), new Rotation2d(0)),
+            new Pose2d(Units.inchesToMeters(90), Units.inchesToMeters(0), new Rotation2d(0)),
             /*so idk why it says new Rotation2d(0) instead of Rotation2d.fromDegrees but i cant test the difference
              * now bc technical still needs to assemble the chassis so i'll wait to change this during testing
             */
