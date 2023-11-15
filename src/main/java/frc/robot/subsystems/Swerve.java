@@ -16,7 +16,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import frc.robot.RobotMap;
 
 
-import edu.wpi.first.math.kinematics.SwerveModulePosition; // added by Jun Wu 9/8/2023
+import edu.wpi.first.math.kinematics.SwerveModulePosition; // added 9/8/2023
 
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -101,7 +101,7 @@ public class Swerve extends SubsystemBase {
     return states;
   }
 
-  // Added by Jun Wu 9/8/2023, copied from https://github.com/SuperiorRoboworksTeam857/2023SwerveTest/blob/main/src/main/java/frc/robot/subsystems/Swerve.java
+  // Added on 9/8/2023, copied from https://github.com/SuperiorRoboworksTeam857/2023SwerveTest/blob/main/src/main/java/frc/robot/subsystems/Swerve.java
   //              or similarly from  https://github.com/Team364/BaseFalconSwerve/blob/main/src/main/java/frc/robot/subsystems/Swerve.java
   public SwerveModulePosition[] getPositions(){
     SwerveModulePosition[] positions = new SwerveModulePosition[4];

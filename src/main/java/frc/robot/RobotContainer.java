@@ -42,7 +42,7 @@ public class RobotContainer {
 
 
 
-  // Added by Jun Wu on 9/8/2023, copied from https://github.com/SuperiorRoboworksTeam857/2023SwerveTest/blob/main/src/main/java/frc/robot/RobotContainer.java
+  // Added on 9/8/2023, copied from https://github.com/SuperiorRoboworksTeam857/2023SwerveTest/blob/main/src/main/java/frc/robot/RobotContainer.java
   //private final JoystickButton slowSpeed =
       //new JoystickButton(driver, XboxController.Button.kRightBumper.value);
   /* Subsystems */
