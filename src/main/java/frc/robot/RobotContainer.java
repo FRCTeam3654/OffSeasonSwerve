@@ -20,6 +20,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+import org.photonvision.PhotonCamera;
+import org.photonvision.PhotonUtils;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -38,6 +40,11 @@ public class RobotContainer {
   private final int translationAxis = XboxController.Axis.kLeftY.value;
   private final int strafeAxis = XboxController.Axis.kLeftX.value;
   private final int rotationAxis = XboxController.Axis.kRightX.value;
+
+  //  This is vision code AJK
+
+  // Change this to match the name of your camera
+  PhotonCamera camera = new PhotonCamera("photonvision");
 
 
 
@@ -79,6 +86,7 @@ public class RobotContainer {
 
 
     oi.turnLeft180Button.onTrue(new TurnToAngleCommand(s_Swerve, 180, 3));
+    oi.limelightButton.onTrue(new VisionTurnToAngle(s_Swerve, camera, 3));
   }
 
   /**

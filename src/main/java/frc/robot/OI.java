@@ -46,6 +46,7 @@ public class OI {
   public JoystickButton turnLeft180Button;
   public JoystickButton turnRight180Button;
   public JoystickButton slowSpeed;
+
       //new JoystickButton(driver, XboxController.Button.kRightBumper.value);
  
 
@@ -74,7 +75,7 @@ public class OI {
   zeroGyro = new JoystickButton(driverStick, XboxController.Button.kY.value);
   robotCentric = new JoystickButton(driverStick, XboxController.Button.kLeftBumper.value);
   slowSpeed = new JoystickButton(driverStick, XboxController.Button.kRightBumper.value);
-
+  limelightButton = new JoystickButton(driverStick, XboxController.Button.kStart.value);
 
 
 

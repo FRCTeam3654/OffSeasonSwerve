@@ -8,6 +8,7 @@
 // imports 
 package frc.robot;
 import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.math.util.Units;
 //import edu.wpi.first.wpilibj.util.Color;
 //import com.revrobotics.ColorMatch;
 
@@ -142,6 +143,16 @@ public static final int kTimeoutMs = 30;
  */
 //public static final Gains pickUpArmGains = new Gains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
 //public static final Gains kGains = new Gains(0.095, 0.0, 0, 0.0451, 0, 0.25); // colorWheelTalon  use this
+
+// Vision Processing AJK-----
+    // Constants such as camera and target height stored. Change per robot and goal!
+    public static final double VISION_CAMERA_HEIGHT_METERS = Units.inchesToMeters(24);
+    public static final double VISION_TARGET_HEIGHT_METERS = Units.feetToMeters(5);
+    // Angle between horizontal and the camera.
+    public static final double VISION_CAMERA_PITCH_RADIANS = Units.degreesToRadians(0);
+
+    // How far from the target we want to be
+    public static final double VISION_GOAL_RANGE_METERS = Units.feetToMeters(3);
 
 
 }
